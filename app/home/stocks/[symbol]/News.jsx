@@ -27,7 +27,7 @@ const newsItems = [
 
 const NewsSimplifier = () => {
   return (
-    <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <section className=" mx-auto px-4 sm:px-6 lg:px-8 py-10">
       {/* Header */}
       <header className="mb-6">
         <h2 className="text-black text-xl sm:text-2xl font-semibold">

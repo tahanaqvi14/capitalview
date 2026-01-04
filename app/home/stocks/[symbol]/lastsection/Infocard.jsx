@@ -2,7 +2,7 @@
 export default function Infocard() {
 
     return (
-        <div className="bg-white rounded-xl shadow-sm p-4">
+        <div className="flex flex-col bg-white rounded-xl shadow-sm p-4">
             <p className="text-xs uppercase font-semibold mb-1 text-gray-500">Event</p>
             <h3 className="text-lg font-semibold mb-4 text-black">
                 Federal Rate Hike
@@ -18,7 +18,7 @@ export default function Infocard() {
                 for future cash flows.
             </p>
 
-            <div className="bg-green-50 text-green-700 text-sm p-3 rounded-lg">
+            <div className="bg-green-50 mt-auto text-green-700 text-sm p-3 rounded-lg">
                 Fear – uncertainty about economic slowdown triggered profit-taking
             </div>
         </div>

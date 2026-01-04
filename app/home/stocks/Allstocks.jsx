@@ -1,29 +1,55 @@
-'use client'
+'use client';
 
-export default function Allstock({keyword}) {
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import './style.css';
 
+export default function Allstock({ keyword }) {
+  const [stocks, setStocks] = useState([]);
+  const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    if (!keyword) {
+      setStocks([]);
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
+
+    // Client fetches YOUR API route — no secret exposed
+    fetch(`/api?q=${encodeURIComponent(keyword)}`)
+    .then(res => res.json())
+    .then(data => setStocks(data.result || []))
+    .catch(() => setStocks([]))
+    .finally(() => setLoading(false));
+  
+  }, [keyword]);
+
+  if (loading) {
     return (
-            <a href="https://www.google.com" target="_blank" rel="noopener noreferrer" className="block bg-white border rounded-lg p-4 flex justify-between items-center hover:shadow-lg hover:-translate-y-1 transition-transform transition-shadow duration-500 ease-out cursor-pointer mb-2">
-            <div>
-                <p className="font-semibold text-black">META</p>
-                <p className="text-sm text-black">Meta Platforms Inc.</p>
-            </div>
+      <div className="flex flex-col justify-center items-center mt-10">
+        <div className="loader"></div>
+        <p className="text-gray-500 mt-2">Loading stocks...</p>
+      </div>
+    );
+  }
 
-            <div className="text-right">
-                <p className="font-semibold text-black">$512.45</p>
-                <p className="text-sm text-black">NASDAQ · USD</p>
-            </div>
-        </a>
-        // <div className=" w-full max-w-3xl mx-auto rounded-lg border border-gray-200 bg-white px-4 sm:px-6 lg:px-8 py-8 sm:py-10 text-center">
-        //     <p className=" text-sm sm:text-base font-medium text-gray-700">
-        //         No stocks found matching{" "}
-        //         <span className="font-semibold">"{keyword}"</span>
-        //     </p>
-        //     <p className=" mt-2 text-xs sm:text-sm text-gray-500">
-        //         Try searching with different keywords, symbols, or country names
-        //     </p>
-        // </div>
+  if (!stocks.length) {
+    return <p className="text-gray-500 mt-4">No stocks found.</p>;
+  }
 
-    )
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      {stocks.map(stock => (
+        <Link key={stock.symbol} href={`stocks/${stock.symbol}`}>
+          <div className="bg-white p-4 rounded border hover:shadow-lg hover:-translate-y-1 transition-transform duration-300 cursor-pointer">
+            <p className="font-semibold text-black">{stock.description}</p>
+            <p className="text-sm text-black">{stock.symbol}</p>
+            <p className="text-gray-400 mt-2">{stock.type}</p>
+          </div>
+        </Link>
+      ))}
+    </div>
+  );
 }

@@ -1,14 +1,12 @@
-"use client";
-
 import Searchbar from "./stocks/Searchbar";
 import Popularstok from "./Popularstocks";
 import Allstock from "./AllStocks";
+import { Suspense } from "react";
+
 
 export default function HomePage() {
-
-
     return (
-        <main className="min-h-screen bg-gray-50 ">
+        <main className="min-h-screen bg-gray-50">
             {/* Header */}
             <header className="flex items-center justify-between px-8 py-4 bg-white border-b">
                 <div className="flex items-center gap-2 text-xl font-semibold">
@@ -28,11 +26,16 @@ export default function HomePage() {
 
             {/* Content */}
             <section className="w-full px-8 py-6">
-                <Searchbar/>
-                <Popularstok/>
-                <Allstock/>
+                <Searchbar />
+                {/* <Suspense fallback={<p className="text-black text-center mt-5">Loading popular stocks...</p>}>
+                    <Popularstok />
+                </Suspense> */}
+
+                <Suspense fallback={<p className="text-black text-center mt-5">Loading News...</p>}>
+                    <Allstock />
+                </Suspense>
             </section>
-        
+
         </main>
     );
 }

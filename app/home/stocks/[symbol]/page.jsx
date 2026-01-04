@@ -1,12 +1,12 @@
-'use client'
 import Basicinf from "./Basicinfo"
 import AIStockThesis from "./Aithesis"
 import NewsSimplifier from "./News"
 import Pricemovement from "./Pricemovement"
 
-export default function Onestock() {
+export default async function Onestock(props){
 
-
+    const symbol=await props.params;
+    console.log(symbol)
     return (
         <div className="bg-gray-50 min-h-screen">
             {/* Header */}
@@ -26,8 +26,8 @@ export default function Onestock() {
                 </nav>
             </header>
 
-            <Basicinf />
-            <AIStockThesis />
+            <Basicinf symbol={symbol.symbol}/>
+            <AIStockThesis symbol={symbol.symbol}/>
             <NewsSimplifier />
             <Pricemovement />
         </div>

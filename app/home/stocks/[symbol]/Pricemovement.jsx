@@ -4,7 +4,7 @@ import Infocard from "./lastsection/Infocard";
 export default function Pricemovement() {
 
   return (
-    <div className="p-4 w-full max-w-6xl">
+    <div className="p-4 w-full ">
       
       <h2 className="text-black text-xl sm:text-2xl font-semibold mb-4">
         Price Movement Explained

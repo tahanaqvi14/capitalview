@@ -1,4 +1,6 @@
-'use client'
+
+import { getStockThesis } from "./AISection.action";
+
 const thesisItems = [
   {
     title: "Business Model",
@@ -38,9 +40,11 @@ const thesisItems = [
   },
 ];
 
-const AIStockThesis = () => {
+export default async function AIStockThesis ({ symbol }) {
+  let a= await getStockThesis(symbol);
+  console.log(a);
   return (
-    <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <section className="mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Header */}
       <header className="mb-8">
         <h2 className="text-xl text-black sm:text-2xl font-semibold flex items-center gap-2">
@@ -102,4 +106,4 @@ const AIStockThesis = () => {
   );
 };
 
-export default AIStockThesis;
+
